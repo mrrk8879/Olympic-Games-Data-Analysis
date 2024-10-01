@@ -28,20 +28,34 @@ Column Name |	Type	  | Description
 -
 __________________________________________________________________
 id	        | INT	    | Athlete ID (Primary key)
-name	      | VARCHAR |	Athlete name
+
+name	    | VARCHAR   |	Athlete name
+
 sex	        | VARCHAR	| Athlete's gender (M/F)
+
 age	        | VARCHAR	| Athlete's age
+
 height	    | VARCHAR	| Athlete's height (cm)
+
 weight	    | VARCHAR	| Athlete's weight (kg)
-team	      | VARCHAR	| Athlete's team or country
+
+team	    | VARCHAR	| Athlete's team or country
+
 noc	        | VARCHAR	| National Olympic Committee code (NOC)
-games	      | VARCHAR	| Olympic games edition (e.g., 2016 Summer)
-year	      | INT	    | Year of the Olympic games
+
+games	    | VARCHAR	| Olympic games edition (e.g., 2016 Summer)
+
+year	    | INT	    | Year of the Olympic games
+
 season	    | VARCHAR	| Season (Summer/Winter)
-city	      | VARCHAR	| Host city
-sport	      | VARCHAR	| Sport played
-event	      | VARCHAR	| Event within the sport
-medal	      | VARCHAR	| Medal won (Gold/Silver/Bronze/None)
+
+city	    | VARCHAR	| Host city
+
+sport	    | VARCHAR	| Sport played
+
+event	    | VARCHAR	| Event within the sport
+
+medal	    | VARCHAR	| Medal won (Gold/Silver/Bronze/None)
 
 Table 2: OLYMPICS_HISTORY_NOC_REGIONS
 -
@@ -50,8 +64,10 @@ Column Name |	Type	   | Description
 -
 ______________________________________________________________________
 noc	        | VARCHAR	 | National Olympic Committee code (Primary key)
+
 region	    | VARCHAR	 | Corresponding region or country
-notes	      | VARCHAR	 | Additional notes on the NOC
+
+notes	    | VARCHAR	 | Additional notes on the NOC
 
 
 Setup Instructions
