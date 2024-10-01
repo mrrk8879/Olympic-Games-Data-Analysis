@@ -35,10 +35,10 @@ The dataset can be imported into your SQL environment using the import/export fu
 ## **Database Schema**
 ### **Table 1: OLYMPICS_HISTORY**
 
-__________________________________________________________________
+______________________________________________
 **Column Name** |	**Type**	  | **Description**  
 
-__________________________________________________________________
+______________________________________________
 id\t	        | INT	    | Athlete ID (Primary key)
 
 name	    | VARCHAR   |	Athlete name
@@ -69,12 +69,12 @@ event	    | VARCHAR	| Event within the sport
 
 medal	    | VARCHAR	| Medal won (Gold/Silver/Bronze/None)
 
-Table 2: OLYMPICS_HISTORY_NOC_REGIONS
+### **Table 2: OLYMPICS_HISTORY_NOC_REGIONS**
 
-______________________________________________________________________
-Column Name |	Type	   | Description
+_____________________________________
+**Column Name** |	**Type**	   | **Description**
 
-______________________________________________________________________
+_____________________________________
 noc	        | VARCHAR	 | National Olympic Committee code (Primary key)
 
 region	    | VARCHAR	 | Corresponding region or country
@@ -82,47 +82,74 @@ region	    | VARCHAR	 | Corresponding region or country
 notes	    | VARCHAR	 | Additional notes on the NOC
 
 
-Setup Instructions
-Step 1: Create the Database and Tables
-Run the following SQL script to create the necessary tables:
+## **Setup Instructions**
 
-sql
-Copy code
+### **Step 1:** Create the Database and Tables
+
+**Run the following SQL script to create the necessary tables:**
+
 *DROP TABLE IF EXISTS OLYMPICS_HISTORY;*
+
 *CREATE TABLE IF NOT EXISTS OLYMPICS_HISTORY*
+
 *(*
+
     *id          INT,*
+    
     *name        VARCHAR,*
+    
     *sex         VARCHAR,*
+    
     *age         VARCHAR,*
+    
     *height      VARCHAR,*
+    
     *weight      VARCHAR,*
+    
     *team        VARCHAR,*
+    
     *noc         VARCHAR,*
+    
     *games       VARCHAR,*
+    
     *year        INT,*
+    
     *season      VARCHAR,*
+    
     *city        VARCHAR,*
+    
     *sport       VARCHAR,*
+    
     *event       VARCHAR,*
+    
     *Medal       VARCHAR*
+    
 *);*
 
 *DROP TABLE IF EXISTS OLYMPICS_HISTORY_NOC_REGIONS;*
+
 *CREATE TABLE IF NOT EXISTS OLYMPICS_HISTORY_NOC_REGIONS*
+
 *(*
+
     *noc         VARCHAR,*
+    
     *region      VARCHAR,*
+    
     *notes       VARCHAR*
+    
 *);*
-Step 2: Import the Data
+
+### **Step 2: Import the Data**
+
 Use your database’s import/export feature to load data into the OLYMPICS_HISTORY and OLYMPICS_HISTORY_NOC_REGIONS tables. Ensure to properly handle escape characters when loading the data to avoid import issues.
 
-Step 3: Run the Queries
+### **Step 3: Run the Queries**
 Each of the following queries provides insights into the Olympic data. You can run them one at a time to answer specific questions about the dataset.
 
-Key Queries
-1. How many Olympic Games have been held?
+## **Key Queries**
+
+**1. How many Olympic Games have been held?**
    
 CREATE MATERIALIZED VIEW total_games AS
 
@@ -132,7 +159,7 @@ FROM (SELECT games FROM OLYMPICS_HISTORY GROUP BY games) AS subquery;
 
 SELECT * FROM total_games;
 
-2. List down all Olympics games held so far.
+**2. List down all Olympics games held so far.**
 
 SELECT 
 
@@ -148,7 +175,7 @@ GROUP BY games, city
 
 ORDER BY year;
 
-3. Number of nations participating in each Olympics game.
+**3. Number of nations participating in each Olympics game.**
 
 CREATE MATERIALIZED VIEW total_no_of_countries_per_season AS
 
@@ -174,29 +201,50 @@ GROUP BY games;
 
 SELECT * FROM total_no_of_countries_per_season;
 
-Running the Queries
+## **Running the Queries**
+
 Once you have set up the database and imported the data, you can run the above queries to get insights into the Olympic Games data.
 
-List of Queries
-Query 1: How many Olympic Games have been held?
-Query 2: List all Olympic Games held so far.
-Query 3: Number of nations participating in each Olympics game.
-Query 4: Which year saw the highest and lowest number of countries participating?
-Query 5: Which nation has participated in all Olympic Games?
-Query 6: Sport played in all Summer Olympic Games.
-Query 7: Sports played only once in the Olympics.
-Query 8: Total number of sports played in each Olympic Games.
-Query 9: Oldest athlete to win a gold medal.
-Query 10: Ratio of male to female athletes.
-Query 11: Top 5 athletes with the most gold medals.
-Query 12: Top 5 athletes with the most total medals.
-Query 13: Top 5 most successful countries (by medals).
-Query 14: Total gold, silver, and bronze medals by country.
-Query 15: Total gold, silver, and bronze medals by country for each Olympic Games.
-Query 16: Country with the most gold, silver, and bronze medals in each Olympics.
-Query 17: Countries that won the most medals in each Olympics.
-Query 18: Countries that have never won gold but have won silver/bronze.
-Query 19: Sports in which India has won the highest number of medals.
-Query 20: Breakdown of Olympic Games where India won medals in Hockey.
-Conclusion
+## **List of Queries**
+**Query 1**: How many Olympic Games have been held?
+
+**Query 2**: List all Olympic Games held so far.
+
+**Query 3**: Number of nations participating in each Olympics game.
+
+**Query 4:** Which year saw the highest and lowest number of countries participating?
+
+**Query 5:** Which nation has participated in all Olympic Games?
+
+**Query 6**: Sport played in all Summer Olympic Games.
+
+**Query 7**: Sports played only once in the Olympics.
+
+**Query 8**: Total number of sports played in each Olympic Games.
+
+**Query 9**: Oldest athlete to win a gold medal.
+
+**Query 10**: Ratio of male to female athletes.
+
+**Query 11:** Top 5 athletes with the most gold medals.
+
+**Query 12**: Top 5 athletes with the most total medals.
+
+**Query 13**: Top 5 most successful countries (by medals).
+
+**Query 14**: Total gold, silver, and bronze medals by country.
+
+**Query 15**: Total gold, silver, and bronze medals by country for each Olympic Games.
+
+**Query 16**: Country with the most gold, silver, and bronze medals in each Olympics.
+
+**Query 17**: Countries that won the most medals in each Olympics.
+
+**Query 18**: Countries that have never won gold but have won silver/bronze.
+
+**Query 19**: Sports in which India has won the highest number of medals.
+
+**Query 20**: Breakdown of Olympic Games where India won medals in Hockey.
+
+## **Conclusion**
 This project analyzes historical Olympic data to derive meaningful insights into the athletes, countries, and sports played in various editions of the Olympic Games. The SQL queries provide useful information ranging from medal counts to participation statistics and athlete-specific achievements.
