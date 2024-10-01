@@ -1,33 +1,45 @@
-Olympics History SQL Queries
-Project Overview
-This project involves querying an Olympic Games dataset stored in a relational database using SQL. The dataset contains two main tables:
+# **Olympics History SQL Queries**
+-
+## **Project Overview**
+This project involves querying an Olympic Games dataset stored in a relational database using SQL. 
 
-OLYMPICS_HISTORY – which stores detailed information about athletes and their performance in various Olympic Games.
-OLYMPICS_HISTORY_NOC_REGIONS – which provides information about the National Olympic Committees (NOCs) and the corresponding regions.
+### **The dataset contains two main tables:**
+
+**OLYMPICS_HISTORY** – which stores detailed information about athletes and their performance in various Olympic Games.
+
+**OLYMPICS_HISTORY_NOC_REGIONS** – which provides information about the National Olympic Committees (NOCs) and the corresponding regions.
+
 The goal of this project is to perform a variety of analytical queries to gain insights into the Olympic Games, such as the number of games held, countries participating, sports played, medal counts, and identifying top athletes and nations.
 
 The project includes 20 SQL queries, each designed to answer a specific question about the Olympics data.
 
-Prerequisites
-Before running the queries, ensure you have the following software installed:
+## **Prerequisites**
+**Before running the queries, ensure you have the following software installed:**
 
-A relational database (e.g., PostgreSQL, MySQL)
+A relational database (e.g., PostgreSQL, MySQL) In my case it is PostgreSQL
+
 SQL editor or command-line interface
-Optional: Data import/export tool
-Dataset Source
-The dataset consists of two tables:
-OLYMPICS_HISTORY: Stores information about the athletes, their participation, medals won, and more.
-OLYMPICS_HISTORY_NOC_REGIONS: Maps National Olympic Committees (NOC) to their respective regions (countries).
+
+**Optional**: Data import/export tool
+
+## **Dataset Source**
+
+### **The dataset consists of two tables:**
+
+**OLYMPICS_HISTORY:** Stores information about the athletes, their participation, medals won, and more.
+
+**OLYMPICS_HISTORY_NOC_REGIONS**: Maps National Olympic Committees (NOC) to their respective regions (countries).
+
 The dataset can be imported into your SQL environment using the import/export functionality or directly from SQL files.
 
-Database Schema
-Table 1: OLYMPICS_HISTORY
--
+## **Database Schema**
+### **Table 1: OLYMPICS_HISTORY**
+
 __________________________________________________________________
-Column Name |	Type	  | Description  
--
+**Column Name** |	**Type**	  | **Description**  
+
 __________________________________________________________________
-id	        | INT	    | Athlete ID (Primary key)
+id\t	        | INT	    | Athlete ID (Primary key)
 
 name	    | VARCHAR   |	Athlete name
 
@@ -58,10 +70,10 @@ event	    | VARCHAR	| Event within the sport
 medal	    | VARCHAR	| Medal won (Gold/Silver/Bronze/None)
 
 Table 2: OLYMPICS_HISTORY_NOC_REGIONS
--
+
 ______________________________________________________________________
 Column Name |	Type	   | Description
--
+
 ______________________________________________________________________
 noc	        | VARCHAR	 | National Olympic Committee code (Primary key)
 
@@ -76,33 +88,33 @@ Run the following SQL script to create the necessary tables:
 
 sql
 Copy code
-DROP TABLE IF EXISTS OLYMPICS_HISTORY;
-CREATE TABLE IF NOT EXISTS OLYMPICS_HISTORY
-(
-    id          INT,
-    name        VARCHAR,
-    sex         VARCHAR,
-    age         VARCHAR,
-    height      VARCHAR,
-    weight      VARCHAR,
-    team        VARCHAR,
-    noc         VARCHAR,
-    games       VARCHAR,
-    year        INT,
-    season      VARCHAR,
-    city        VARCHAR,
-    sport       VARCHAR,
-    event       VARCHAR,
-    medal       VARCHAR
-);
+*DROP TABLE IF EXISTS OLYMPICS_HISTORY;*
+*CREATE TABLE IF NOT EXISTS OLYMPICS_HISTORY*
+*(*
+    *id          INT,*
+    *name        VARCHAR,*
+    *sex         VARCHAR,*
+    *age         VARCHAR,*
+    *height      VARCHAR,*
+    *weight      VARCHAR,*
+    *team        VARCHAR,*
+    *noc         VARCHAR,*
+    *games       VARCHAR,*
+    *year        INT,*
+    *season      VARCHAR,*
+    *city        VARCHAR,*
+    *sport       VARCHAR,*
+    *event       VARCHAR,*
+    *Medal       VARCHAR*
+*);*
 
-DROP TABLE IF EXISTS OLYMPICS_HISTORY_NOC_REGIONS;
-CREATE TABLE IF NOT EXISTS OLYMPICS_HISTORY_NOC_REGIONS
-(
-    noc         VARCHAR,
-    region      VARCHAR,
-    notes       VARCHAR
-);
+*DROP TABLE IF EXISTS OLYMPICS_HISTORY_NOC_REGIONS;*
+*CREATE TABLE IF NOT EXISTS OLYMPICS_HISTORY_NOC_REGIONS*
+*(*
+    *noc         VARCHAR,*
+    *region      VARCHAR,*
+    *notes       VARCHAR*
+*);*
 Step 2: Import the Data
 Use your database’s import/export feature to load data into the OLYMPICS_HISTORY and OLYMPICS_HISTORY_NOC_REGIONS tables. Ensure to properly handle escape characters when loading the data to avoid import issues.
 
@@ -111,42 +123,56 @@ Each of the following queries provides insights into the Olympic data. You can r
 
 Key Queries
 1. How many Olympic Games have been held?
-sql
-Copy code
+   
 CREATE MATERIALIZED VIEW total_games AS
+
 SELECT COUNT(1) AS total_olympic_games
+
 FROM (SELECT games FROM OLYMPICS_HISTORY GROUP BY games) AS subquery;
 
 SELECT * FROM total_games;
+
 2. List down all Olympics games held so far.
-sql
-Copy code
+
 SELECT 
+
     SUBSTRING(games, 1, POSITION(' ' IN games)) AS year, 
+    
     SUBSTRING(games, POSITION(' ' IN games)) AS season, 
+    
     city
+    
 FROM OLYMPICS_HISTORY
+
 GROUP BY games, city
+
 ORDER BY year;
+
 3. Number of nations participating in each Olympics game.
-sql
-Copy code
+
 CREATE MATERIALIZED VIEW total_no_of_countries_per_season AS
+
 SELECT 
+
     games, 
+    
     COUNT(1) AS total_countries
+    
 FROM (
+
     SELECT games, region
+    
     FROM OLYMPICS_HISTORY oh
+    
     JOIN OLYMPICS_HISTORY_NOC_REGIONS ohn USING(noc)
+    
     GROUP BY games, region
+    
     ORDER BY games) AS no_of_countries
+    
 GROUP BY games;
 
 SELECT * FROM total_no_of_countries_per_season;
-...
-
-(Include the other queries in the same format.)
 
 Running the Queries
 Once you have set up the database and imported the data, you can run the above queries to get insights into the Olympic Games data.
