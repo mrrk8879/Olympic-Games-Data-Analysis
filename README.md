@@ -88,57 +88,57 @@ notes	    | VARCHAR	 | Additional notes on the NOC
 
 **Run the following SQL script to create the necessary tables:**
 
-*DROP TABLE IF EXISTS OLYMPICS_HISTORY;*
+DROP TABLE IF EXISTS OLYMPICS_HISTORY;
 
-*CREATE TABLE IF NOT EXISTS OLYMPICS_HISTORY*
+CREATE TABLE IF NOT EXISTS OLYMPICS_HISTORY
 
-*(*
+(
 
-    *id          INT,*
+    id          INT,
     
-    *name        VARCHAR,*
+    name        VARCHAR,
     
-    *sex         VARCHAR,*
+    sex         VARCHAR,
     
-    *age         VARCHAR,*
+    age         VARCHAR,
     
-    *height      VARCHAR,*
+    height      VARCHAR,
     
-    *weight      VARCHAR,*
+    weight      VARCHAR,
     
-    *team        VARCHAR,*
+    team        VARCHAR,
     
-    *noc         VARCHAR,*
+    noc         VARCHAR,
     
-    *games       VARCHAR,*
+    games       VARCHAR,
     
-    *year        INT,*
+    year        INT,
     
-    *season      VARCHAR,*
+    season      VARCHAR,
     
-    *city        VARCHAR,*
+    city        VARCHAR,
     
-    *sport       VARCHAR,*
+    sport       VARCHAR,
     
-    *event       VARCHAR,*
+    event       VARCHAR,
     
-    *Medal       VARCHAR*
+    Medal       VARCHAR
     
-*);*
+);
 
 *DROP TABLE IF EXISTS OLYMPICS_HISTORY_NOC_REGIONS;*
 
 *CREATE TABLE IF NOT EXISTS OLYMPICS_HISTORY_NOC_REGIONS*
 
-*(*
+(
 
-    *noc         VARCHAR,*
+    noc         VARCHAR,
     
-    *region      VARCHAR,*
+    region      VARCHAR,
     
-    *notes       VARCHAR*
+    notes       VARCHAR
     
-*);*
+);
 
 ### **Step 2: Import the Data**
 
@@ -155,7 +155,13 @@ CREATE MATERIALIZED VIEW total_games AS
 
 SELECT COUNT(1) AS total_olympic_games
 
-FROM (SELECT games FROM OLYMPICS_HISTORY GROUP BY games) AS subquery;
+FROM 
+
+   (
+   
+      SELECT games FROM OLYMPICS_HISTORY GROUP BY games
+      
+   ) AS subquery;
 
 SELECT * FROM total_games;
 
@@ -185,7 +191,9 @@ SELECT
     
     COUNT(1) AS total_countries
     
-FROM (
+FROM 
+
+(
 
     SELECT games, region
     
@@ -195,7 +203,9 @@ FROM (
     
     GROUP BY games, region
     
-    ORDER BY games) AS no_of_countries
+    ORDER BY games
+    
+    ) AS no_of_countries
     
 GROUP BY games;
 
