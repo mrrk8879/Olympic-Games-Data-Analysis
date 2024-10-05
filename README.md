@@ -1,7 +1,7 @@
 # **Olympics History SQL Queries**
--
+
 ## **Project Overview**
-This project involves querying an Olympic Games dataset stored in a relational database using SQL. 
+This project involves querying an Olympic Games dataset stored in a relational database using PostgreSQL. 
 
 ### **The dataset contains two main tables:**
 
@@ -12,6 +12,9 @@ This project involves querying an Olympic Games dataset stored in a relational d
 The goal of this project is to perform a variety of analytical queries to gain insights into the Olympic Games, such as the number of games held, countries participating, sports played, medal counts, and identifying top athletes and nations.
 
 The project includes 20 SQL queries, each designed to answer a specific question about the Olympics data.
+
+## **Datasets Link:-** 
+https://drive.google.com/drive/folders/1v4aQ21Spaa4gLZOU8NqEkD9f_Ijwup6d?usp=drive_link
 
 ## **Prerequisites**
 **Before running the queries, ensure you have the following software installed:**
