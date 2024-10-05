@@ -259,7 +259,6 @@ Once you have set up the database and imported the data, you can run the above q
 
 **Query 20**: Breakdown of Olympic Games where India won medals in Hockey.
 
-## **Datasets Link**:- https://drive.google.com/drive/folders/1v4aQ21Spaa4gLZOU8NqEkD9f_Ijwup6d?usp=sharing
 
 ## **Conclusion**
 This project analyzes historical Olympic data to derive meaningful insights into the athletes, countries, and sports played in various editions of the Olympic Games. The SQL queries provide useful information ranging from medal counts to participation statistics and athlete-specific achievements.
