@@ -91,57 +91,57 @@ notes	    | VARCHAR	 | Additional notes on the NOC
 
 **Run the following SQL script to create the necessary tables:**
 
-DROP TABLE IF EXISTS OLYMPICS_HISTORY;
+        DROP TABLE IF EXISTS OLYMPICS_HISTORY;
+        
+        CREATE TABLE IF NOT EXISTS OLYMPICS_HISTORY
+        
+        (
+        
+            id          INT,
+            
+            name        VARCHAR,
+            
+            sex         VARCHAR,
+            
+            age         VARCHAR,
+            
+            height      VARCHAR,
+            
+            weight      VARCHAR,
+            
+            team        VARCHAR,
+            
+            noc         VARCHAR,
+            
+            games       VARCHAR,
+            
+            year        INT,
+            
+            season      VARCHAR,
+            
+            city        VARCHAR,
+            
+            sport       VARCHAR,
+            
+            event       VARCHAR,
+            
+            Medal       VARCHAR
+            
+        );
 
-CREATE TABLE IF NOT EXISTS OLYMPICS_HISTORY
-
-(
-
-    id          INT,
-    
-    name        VARCHAR,
-    
-    sex         VARCHAR,
-    
-    age         VARCHAR,
-    
-    height      VARCHAR,
-    
-    weight      VARCHAR,
-    
-    team        VARCHAR,
-    
-    noc         VARCHAR,
-    
-    games       VARCHAR,
-    
-    year        INT,
-    
-    season      VARCHAR,
-    
-    city        VARCHAR,
-    
-    sport       VARCHAR,
-    
-    event       VARCHAR,
-    
-    Medal       VARCHAR
-    
-);
-
-*DROP TABLE IF EXISTS OLYMPICS_HISTORY_NOC_REGIONS;*
-
-*CREATE TABLE IF NOT EXISTS OLYMPICS_HISTORY_NOC_REGIONS*
-
-(
-
-    noc         VARCHAR,
-    
-    region      VARCHAR,
-    
-    notes       VARCHAR
-    
-);
+        *DROP TABLE IF EXISTS OLYMPICS_HISTORY_NOC_REGIONS;*
+        
+        *CREATE TABLE IF NOT EXISTS OLYMPICS_HISTORY_NOC_REGIONS*
+        
+        (
+        
+            noc         VARCHAR,
+            
+            region      VARCHAR,
+            
+            notes       VARCHAR
+            
+        );
 
 ### **Step 2: Import the Data**
 
@@ -154,65 +154,65 @@ Each of the following queries provides insights into the Olympic data. You can r
 
 **1. How many Olympic Games have been held?**
    
-CREATE MATERIALIZED VIEW total_games AS
-
-SELECT COUNT(1) AS total_olympic_games
-
-FROM 
-
-   (
-   
-      SELECT games FROM OLYMPICS_HISTORY GROUP BY games
-      
-   ) AS subquery;
-
-SELECT * FROM total_games;
+        CREATE MATERIALIZED VIEW total_games AS
+        
+        SELECT COUNT(1) AS total_olympic_games
+        
+        FROM 
+        
+           (
+           
+              SELECT games FROM OLYMPICS_HISTORY GROUP BY games
+              
+           ) AS subquery;
+        
+        SELECT * FROM total_games;
 
 **2. List down all Olympics games held so far.**
 
-SELECT 
-
-    SUBSTRING(games, 1, POSITION(' ' IN games)) AS year, 
-    
-    SUBSTRING(games, POSITION(' ' IN games)) AS season, 
-    
-    city
-    
-FROM OLYMPICS_HISTORY
-
-GROUP BY games, city
-
-ORDER BY year;
+        SELECT 
+        
+            SUBSTRING(games, 1, POSITION(' ' IN games)) AS year, 
+            
+            SUBSTRING(games, POSITION(' ' IN games)) AS season, 
+            
+            city
+            
+        FROM OLYMPICS_HISTORY
+        
+        GROUP BY games, city
+        
+        ORDER BY year;
 
 **3. Number of nations participating in each Olympics game.**
 
-CREATE MATERIALIZED VIEW total_no_of_countries_per_season AS
-
-SELECT 
-
-    games, 
-    
-    COUNT(1) AS total_countries
-    
-FROM 
-
-(
-
-    SELECT games, region
-    
-    FROM OLYMPICS_HISTORY oh
-    
-    JOIN OLYMPICS_HISTORY_NOC_REGIONS ohn USING(noc)
-    
-    GROUP BY games, region
-    
-    ORDER BY games
-    
-    ) AS no_of_countries
-    
-GROUP BY games;
-
-SELECT * FROM total_no_of_countries_per_season;
+        CREATE MATERIALIZED VIEW total_no_of_countries_per_season AS
+        
+        SELECT 
+        
+            games, 
+            
+            COUNT(1) AS total_countries
+            
+        FROM 
+        
+        (
+        
+            SELECT games, region
+            
+            FROM OLYMPICS_HISTORY oh
+            
+            JOIN OLYMPICS_HISTORY_NOC_REGIONS ohn USING(noc)
+            
+            GROUP BY games, region
+            
+            ORDER BY games
+            
+            ) AS no_of_countries
+            
+        GROUP BY games;
+        
+        SELECT * FROM total_no_of_countries_per_season;
 
 ## **Running the Queries**
 
